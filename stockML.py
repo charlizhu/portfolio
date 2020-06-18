@@ -46,11 +46,11 @@ topdays = toppeaks[len(toppeaks) - furthestback:len(toppeaks) - mostrecent]
 bottomdays = bottompeaks[len(bottompeaks) - furthestback:len(bottompeaks) - mostrecent]
 
 # TO BE CHANGED LATER -- Manually boxed out a time frame
-for x in range(len(toppeaks) - furthestback,len(toppeaks) - mostrecent):
-    tops.append(averagedstockvals[toppeaks[x]])
+for x in topdays:
+    tops.append(averagedstockvals[x])
 
-for x in range(len(bottompeaks) - furthestback,len(bottompeaks) - mostrecent):
-    bottoms.append(averagedstockvals[bottompeaks[x]])
+for x in bottomdays:
+    bottoms.append(averagedstockvals[x])
 
 # Linear Regression
 minpoints = 10
@@ -85,32 +85,46 @@ while (len(bottoms) >= minpoints) and (actualbottomR <= minR):
     np_bottomdays = np.delete(np_bottomdays,0)
     np_bottoms = np.delete(np_bottoms,0)
 
-'''
+
 print(topmodel.intercept_)
 print(topmodel.coef_[0])
 print(bottommodel.intercept_)
 print(bottommodel.coef_[0])
+'''
 print(actualtopR)
 print(actualbottomR)
 print(np_bottomdays)
 print(np_topdays)
 '''
 
+np_bottomdays = np_bottomdays.tolist()
+np_topdays = np_topdays.tolist()
+
 # Plotting
-B1 = (np_bottomdays[0]).item()
-B2 = (np_bottomdays[len(np_bottomdays) - 1]).item()
-bottomdayarray = (np.linspace(B1, B2, num=(B2 - B1 + 1)))
+'''
+for abscissa1 in np_topdays:
+    ordinate1 = topmodel.intercept_ + abscissa1 * topmodel.coef_[0]
+    plt.plot(abscissa1,ordinate1)
 
-T1 = (np_topdays[0]).item()
-T2 = (np_topdays[len(np_topdays) - 1]).item()
-topdayarray = (np.linspace(T1, T2, num=(T2 - T1 + 1)))
+for abscissa2 in np_bottomdays:
+    ordinate2 = bottommodel.intercept_ + abscissa2 * bottommodel.coef_[0]
+    plt.plot(abscissa2,ordinate2)
+'''
 
-bottomarray = bottommodel.intercept_ + int(bottommodel.coef_[0]) * bottomdayarray
-toparray = topmodel.intercept_ + int(topmodel.coef_[0]) * topdayarray
+topX1 = np_topdays[0]
+topY1 = topmodel.intercept_ + topX1 * topmodel.coef_[0]
+topX2 = np_topdays[-1]
+topY2 = topmodel.intercept_ + topX2 * topmodel.coef_[0]
+botX1 = np_bottomdays[0]
+botY1 = bottommodel.intercept_ + botX1 * bottommodel.coef_[0]
+botX2 = np_bottomdays[-1]
+botY2 = bottommodel.intercept_ + botX2 * bottommodel.coef_[0]
 
-plt.plot(bottomdayarray,bottomarray,'--')
-plt.plot(topdayarray,toparray,'--')
-plt.plot(alldays,stockvals)
-plt.plot(avgdays,averagedstockvals)
+plt.plot([topX1,topX2],[topY1,topY2], color = 'g')
+plt.plot([botX1,botX2],[botY1,botY2], color = 'r')
+plt.plot(alldays,stockvals,color = '0.5',linewidth = 1.00)
+plt.plot(avgdays,averagedstockvals, color = '0.25',linewidth = 0.25)
 
+plt.xlim(6250,7000)
+plt.ylim(-250,1500)
 plt.show()
