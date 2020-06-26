@@ -1,5 +1,3 @@
-# THIS IS WHAT I HAVE SO FAR some parts may still be buggy.
-
 class stockModeller(object):
 
     def __init__(self, myStock):
@@ -14,7 +12,7 @@ class stockModeller(object):
     def tableofcontents(self,action):
         if self.action == 1:
             self.avgCalc(self.stockvals,self.alldays)
-        elif self.action == 2 or 3:
+        elif self.action == 2 or self.action == 3:
             self.minAndmax(self.stockvals,self.alldays,self.action)
         elif self.action == 5:
             import webbrowser
@@ -78,9 +76,7 @@ class stockModeller(object):
             self.allpeaks = np.delete(self.allpeaks, 0)
             self.extremeVals = np.delete(self.extremeVals, 0)
 
-        if (len(self.extremeVals) < self.minpoints) and (self.actualR > self.minR):
-            print("Regression not found")
-        else:
+        if hasattr(stockModeller, 'themodel'):
             print("Regression found with intercept: " + str((self.themodel).intercept_) + " and slope: " + str((self.themodel).coef_[0]))
 
             plt.plot(self.alldays, self.stockvals, color='0.25', linewidth=0.25)
@@ -135,7 +131,13 @@ class stockModeller(object):
 
             # print(self.upperVal, self.lowerVal)
 
+            plt.xlim(self.valX1 - 25,self.valX2 + 25)
+            plt.ylim(min(self.downY1,self.downY2) - 25, max(self.upY1,self.upY2) + 25)
+
             plt.show()
+
+        else:
+            print("Regression not found... sorry")
 
     def peakShow(self,toppeaks,bottompeaks,alldays,stockvals):
         plt.plot(self.alldays, self.stockvals, color='0.25', linewidth=0.25)
@@ -157,5 +159,6 @@ if __name__ == '__main__':
     from sklearn.linear_model import LinearRegression
     from scipy.signal import find_peaks as fp
 
+    print("Welcome! (P.S.: Option 5 is a troll)\n\n")
     myStock = input("Enter ticker symbol of what U.S. stock do you want to see: ")
     currentStock = stockModeller(myStock)
