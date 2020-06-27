@@ -9,6 +9,8 @@ Most of this stuff is in Python, though some in MATLAB. I try to make it as vari
 
 My email: *czhu025@gmail.com*
 
+My other Mechanical Engineering portfolio can be found here: *https://bit.ly/3eGxL4K* 
+
 While you're here, feel free to check out the poetry I am doing on the side as well: *https://bit.ly/2y4kFhg*
 
 ***Cheers!***
