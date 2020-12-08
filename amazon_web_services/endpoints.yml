@@ -1,0 +1,43 @@
+swagger: "2.0"
+info:
+  description: "avatar"
+  version: 1.0.0
+  title: avatar
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+paths:
+  "/image":
+    get:
+      description: "presignedURL"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: "Good"
+        400:
+          description: "Bad"
+      x-amazon-apigateway-integration:
+        uri: ${fxn_arn}
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+    post:
+      description: "checkingAdd"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: "Good"
+        400:
+          description: "Bad"
+      x-amazon-apigateway-integration:
+        uri: ${check_arn}
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+    

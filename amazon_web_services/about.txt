@@ -1,10 +1,5 @@
 Hello! 
 
-If you're here you're probably curious about some of the AWS experience I have.
+These AWS files are a test prototype I worked on while I worked at Yalty Software. 
 
-Worry not! i'm still working on compiling some of the stuff I have done, and just tidying things up in general.
-
-Stay tuned! Stuff will be here soon!
-
-Cheers,
-Charlie
+As far as I am aware, Yalty is not using these scripts I made in their current work.
