@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Charlie App</string>
+    <string name="edit_message">Enter Msg Here</string>
+    <string name="button_send">Enter</string>
+</resources>
